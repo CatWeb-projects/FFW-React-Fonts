@@ -24,5 +24,13 @@ export const tabs = {
         cancelToken: new CancelToken((c: Canceler) => (tabs.fonts.cancel = c))
       }),
     cancel: (() => null) as Canceler
+  },
+
+  fontsA: {
+    action: (): Promise<{ data: any }> =>
+      axios.get(`${baseUrl}/fonts_a`, {
+        cancelToken: new CancelToken((c: Canceler) => (tabs.fontsA.cancel = c))
+      }),
+    cancel: (() => null) as Canceler
   }
 };
