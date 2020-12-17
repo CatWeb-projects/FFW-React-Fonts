@@ -53,11 +53,39 @@ html, body {
 	border: 2px solid grey;
 	border-radius: 20px;
   text-align: center;
+
+  &__fonts-content__right {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cube-common {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .selected-common {
+    cursor: pointer;
+    .active {
+      opacity: 0.5;
+    }
+  }
+
+  .little-cubes {
+    margin-left: 20px;
+    font-size: 24px;
+    opacity: 0.8;
+    font-weight: 800;
+    }
   
   &__font-layout-left {
     width: 200px;
     height: 200px;
-    background-color: green;
     border-radius: 20px;
     border: 2px solid black;
     box-shadow: inset 0px 0px 0px 2px #fff;

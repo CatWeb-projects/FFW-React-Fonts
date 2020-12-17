@@ -11,6 +11,7 @@ export interface FontSelection {
     color?: string;
     id: number;
     label?: string;
+    color_blind_label: string;
   }[];
 }
 

@@ -50,6 +50,17 @@ export const MainLayout = () => {
   //   myFontsData.content;
   // }, [myFontsData]);
 
+  const onSelectFonts = React.useCallback(
+    (id: number) =>
+      myFontsData.content.filter((item) => {
+        if (item.id === id) {
+          setSaveid(id);
+        }
+        return null;
+      }),
+    [myFontsData]
+  );
+
   console.log(data);
   console.log(myFontsData);
   console.log(buyFontsData);
@@ -80,27 +91,20 @@ export const MainLayout = () => {
           myFontsData.content
             .filter((_, key) => key < 1)
             .map((font) => (
-              <div className="fonts-content__left" key={font.id}>
-                <div className="fonts-content__font-layout-left">
-                  <div className="fonts-content__selected-font-left">
-                    {font.abbr}
-                  </div>
-                </div>
-                <div className="fonts-content__cube-text">
-                  <span>{font.label}</span>
-                </div>
-              </div>
-            ))}
-
-        {myFontsData.content &&
-          myFontsData.content
-            .filter((_, key) => key >= 1)
-            .map((font) => (
-              <div className="fonts-content__right" key={font.id}>
-                <div className="fonts-content__font-layout-right">
+              <div
+                className="fonts-content__left selected-common"
+                key={font.id}
+                onClick={() => onSelectFonts(font.id)}
+              >
+                <div
+                  className={`fonts-content__font-layout-left ${
+                    saveId === font.id ? 'active' : ''
+                  }`}
+                  style={{ backgroundColor: font.color }}
+                >
                   <div
-                    className="fonts-content__selected-font-right"
-                    style={{ backgroundColor: font.color }}
+                    className="fonts-content__selected-font-left"
+                    style={{ color: font.color_blind_label }}
                   >
                     {font.abbr}
                   </div>
@@ -110,6 +114,33 @@ export const MainLayout = () => {
                 </div>
               </div>
             ))}
+
+        <div className="fonts-content__right">
+          {myFontsData.content &&
+            myFontsData.content
+              .filter((_, key) => key >= 1)
+              .map((font) => (
+                <div
+                  className="fonts-content__right-wrapper cube-common"
+                  key={font.id}
+                  onClick={() => onSelectFonts(font.id)}
+                >
+                  <div className="fonts-content__font-layout-right selected-common">
+                    <div
+                      className={`fonts-content__selected-font-right little-cubes ${
+                        saveId === font.id ? 'active' : ''
+                      }`}
+                      style={{ backgroundColor: font.color }}
+                    >
+                      {font.abbr}
+                    </div>
+                  </div>
+                  <div className="fonts-content__cube-text">
+                    <span>{font.label}</span>
+                  </div>
+                </div>
+              ))}
+        </div>
       </div>
     </div>
   );
