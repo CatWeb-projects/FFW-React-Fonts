@@ -43,3 +43,47 @@ html, body {
     cursor: pointer;
   }
 }
+
+.fonts-content {
+  display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 80%;
+	height: 50%;
+	border: 2px solid grey;
+	border-radius: 20px;
+  text-align: center;
+  
+  &__font-layout-left {
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    border-radius: 20px;
+    border: 2px solid black;
+    box-shadow: inset 0px 0px 0px 2px #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+  }
+
+  &__selected-font-left {
+    margin-left: 20px;
+    font-size: 40px;
+    color: lightgreen;
+    opacity: 0.8;
+    font-weight: 800;
+  }
+
+  &__selected-font-right {
+  width: 100px;
+	height: 100px;
+	border-radius: 20px;
+	margin-right: 20px;
+	border: 2px solid black;
+	box-shadow: inset 0px 0px 0px 2px #fff;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+  }
+}

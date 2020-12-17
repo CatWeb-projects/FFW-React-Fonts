@@ -2,22 +2,32 @@ import React from 'react';
 import { useRequest } from 'estafette';
 // import { Link } from 'estafette-router';
 import { tabs } from 'services/fonts-api';
-import { Fonts } from 'services/fonts-api.types';
+import { BuyFonts, Fonts, FontSelection } from 'services/fonts-api.types';
 
 import './MainLayout.scss';
 
 export const MainLayout = () => {
   const { request, data } = useRequest<Fonts[]>();
-  const { request: requestMyFonts, data: myFonts } = useRequest<any>();
+  const {
+    request: requestMyFonts,
+    data: myFontsData
+  } = useRequest<FontSelection>();
+  const {
+    request: requestBuyFonts,
+    data: buyFontsData
+  } = useRequest<BuyFonts>();
 
-  const [saveId, setSaveid] = React.useState<any>();
+  const [saveId, setSaveid] = React.useState<number>();
 
   React.useEffect(() => {
     onFetch();
+    requestMyFonts(tabs.myFonts.action());
+    requestBuyFonts(tabs.buyFonts.action());
 
-    requestMyFonts(tabs.fontsA.action());
     return () => {
       tabs.fonts.cancel();
+      tabs.myFonts.cancel();
+      tabs.buyFonts.cancel();
     };
     // eslint-disable-next-line
   }, []);
@@ -36,8 +46,13 @@ export const MainLayout = () => {
     [data]
   );
 
+  // const selectedFonts = React.useMemo(() => {
+  //   myFontsData.content;
+  // }, [myFontsData]);
+
   console.log(data);
-  console.log(myFonts);
+  console.log(myFontsData);
+  console.log(buyFontsData);
 
   return (
     <div className="main-layout">
@@ -58,6 +73,43 @@ export const MainLayout = () => {
               </div>
             ))}
         </div>
+      </div>
+
+      <div className="fonts-content">
+        {myFontsData.content &&
+          myFontsData.content
+            .filter((_, key) => key < 1)
+            .map((font) => (
+              <div className="fonts-content__left" key={font.id}>
+                <div className="fonts-content__font-layout-left">
+                  <div className="fonts-content__selected-font-left">
+                    {font.abbr}
+                  </div>
+                </div>
+                <div className="fonts-content__cube-text">
+                  <span>{font.label}</span>
+                </div>
+              </div>
+            ))}
+
+        {myFontsData.content &&
+          myFontsData.content
+            .filter((_, key) => key >= 1)
+            .map((font) => (
+              <div className="fonts-content__right" key={font.id}>
+                <div className="fonts-content__font-layout-right">
+                  <div
+                    className="fonts-content__selected-font-right"
+                    style={{ backgroundColor: font.color }}
+                  >
+                    {font.abbr}
+                  </div>
+                </div>
+                <div className="fonts-content__cube-text">
+                  <span>{font.label}</span>
+                </div>
+              </div>
+            ))}
       </div>
     </div>
   );

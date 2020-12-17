@@ -4,3 +4,16 @@ export interface Fonts {
   label?: string;
 }
 [];
+
+export interface FontSelection {
+  content: {
+    abbr?: string;
+    color?: string;
+    id: number;
+    label?: string;
+  }[];
+}
+
+export interface BuyFonts {
+  content?: string;
+}
