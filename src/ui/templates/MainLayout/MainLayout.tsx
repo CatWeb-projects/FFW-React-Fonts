@@ -104,7 +104,7 @@ export const MainLayout = () => {
                 >
                   <div
                     className="fonts-content__selected-font-left"
-                    style={{ color: font.color_blind_label }}
+                    style={{ color: font['color-blind-label'] }}
                   >
                     {font.abbr}
                   </div>
@@ -130,7 +130,10 @@ export const MainLayout = () => {
                       className={`fonts-content__selected-font-right little-cubes ${
                         saveId === font.id ? 'active' : ''
                       }`}
-                      style={{ backgroundColor: font.color }}
+                      style={{
+                        backgroundColor: font.color,
+                        color: font['color-blind-label']
+                      }}
                     >
                       {font.abbr}
                     </div>
