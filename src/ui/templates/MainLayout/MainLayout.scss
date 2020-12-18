@@ -20,10 +20,11 @@ html, body {
 	display: flex;
   justify-content: space-around;
   align-items: center;
+  text-transform: uppercase;
 
   &__title {
     font-weight: 700;
-    font-size: 24px;
+    font-size: rem(24px);
   }
   
   &__fonts {
@@ -37,7 +38,7 @@ html, body {
 
   &__fonts-item {
     font-weight: 700;
-    font-size: 18px;
+    font-size: rem(18px);
     color: grey;
     padding: rem(6px 12px);
     cursor: pointer;
@@ -46,20 +47,16 @@ html, body {
 
 .fonts-content {
   display: flex;
-	justify-content: space-around;
 	align-items: center;
 	width: 80%;
 	height: 50%;
-	border: 2px solid grey;
-	border-radius: 20px;
+	border: rem(2px solid grey);
+	border-radius: rem(20px);
   text-align: center;
 
-  &__fonts-content__right {
+  &__right {
     height: 100%;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
+    margin-top: rem(30px);
   }
 
   .cube-common {
@@ -70,23 +67,43 @@ html, body {
   }
 
   .selected-common {
-    cursor: pointer;
+    > div:first-child {
+      cursor: pointer;
+    }
+   
     .active {
       opacity: 0.5;
     }
   }
 
   .little-cubes {
-    margin-left: 20px;
-    font-size: 24px;
+    margin-left: rem(15px);
+    font-size: rem(24px);
     opacity: 0.8;
     font-weight: 800;
+  }
+
+  &__cube-text {
+    color: grey;
+    font-weight: bold;
+    max-width: rem(250px);
+    margin-top: rem(10px);
+    text-align: left;
+    font-size: rem(18px);
+    display: flex;
+   
+    &::before {
+      content: "\2022";
+      color: grey;
+      font-weight: bold;
+      margin-right: rem(10px);
     }
+  }
   
   &__font-layout-left {
-    width: 200px;
-    height: 200px;
-    border-radius: 20px;
+    width: rem(200px);
+    height: rem(200px);
+    border-radius: rem(20px);
     border: 2px solid black;
     box-shadow: inset 0px 0px 0px 2px #fff;
     display: flex;
@@ -96,21 +113,28 @@ html, body {
   }
 
   &__selected-font-left {
-    margin-left: 20px;
-    font-size: 40px;
+    margin-left: rem(20px);
+    font-size: rem(40px);
     opacity: 0.8;
     font-weight: 800;
   }
 
-  &__selected-font-right {
-  width: 100px;
-	height: 100px;
-	border-radius: 20px;
-	margin-right: 20px;
-	border: 2px solid black;
-	box-shadow: inset 0px 0px 0px 2px #fff;
-	display: flex;
-	justify-content: flex-start;
-	align-items: flex-end;
+  &__font-layout-right { 
+    width: rem(100px);
+    height: rem(100px);
+    border-radius: rem(20px);
+    margin-right: rem(20px);
+    border: 2px solid black;
+    box-shadow: inset rem(0px 0px 0px 2px) #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
   }
+}
+
+.loading {
+  font-size: rem(48px);
+  color: orange;
+  display: flex;
+  align-items: center;
 }

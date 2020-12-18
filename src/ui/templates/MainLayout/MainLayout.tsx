@@ -7,7 +7,7 @@ import { BuyFonts, Fonts, FontSelection } from 'services/fonts-api.types';
 import './MainLayout.scss';
 
 export const MainLayout = () => {
-  const { request, data } = useRequest<Fonts[]>();
+  const { request, data, loading } = useRequest<Fonts[]>();
   const {
     request: requestMyFonts,
     data: myFontsData
@@ -86,7 +86,11 @@ export const MainLayout = () => {
         </div>
       </div>
 
-      <div className="fonts-content">
+      <div
+        className="fonts-content"
+        style={{ justifyContent: loading ? 'center' : 'space-around' }}
+      >
+        {loading && <div className="loading">loading...</div>}
         {myFontsData.content &&
           myFontsData.content
             .filter((_, key) => key < 1)
@@ -109,36 +113,48 @@ export const MainLayout = () => {
                     {font.abbr}
                   </div>
                 </div>
-                <div className="fonts-content__cube-text">
+                <div
+                  className={`fonts-content__cube-text ${
+                    saveId === font.id ? 'active' : ''
+                  }`}
+                >
                   <span>{font.label}</span>
                 </div>
               </div>
             ))}
 
-        <div className="fonts-content__right">
+        <div className="fonts-content__right-wrapper">
           {myFontsData.content &&
             myFontsData.content
               .filter((_, key) => key >= 1)
               .map((font) => (
                 <div
-                  className="fonts-content__right-wrapper cube-common"
+                  className="fonts-content__right cube-common selected-common"
                   key={font.id}
                   onClick={() => onSelectFonts(font.id)}
                 >
-                  <div className="fonts-content__font-layout-right selected-common">
+                  <div
+                    className={`fonts-content__font-layout-right ${
+                      saveId === font.id ? 'active' : ''
+                    }`}
+                    style={{
+                      backgroundColor: font.color
+                    }}
+                  >
                     <div
-                      className={`fonts-content__selected-font-right little-cubes ${
-                        saveId === font.id ? 'active' : ''
-                      }`}
+                      className="fonts-content__selected-font-right little-cubes"
                       style={{
-                        backgroundColor: font.color,
                         color: font['color-blind-label']
                       }}
                     >
                       {font.abbr}
                     </div>
                   </div>
-                  <div className="fonts-content__cube-text">
+                  <div
+                    className={`fonts-content__cube-text ${
+                      saveId === font.id ? 'active' : ''
+                    }`}
+                  >
                     <span>{font.label}</span>
                   </div>
                 </div>
