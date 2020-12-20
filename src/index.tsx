@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MainLayout } from 'ui/templates/MainLayout/MainLayout';
+import { CreateRouter } from 'estafette-router';
 
 import 'styles/styles.scss';
+import { routes } from 'routes';
 
 ReactDOM.render(
   <React.StrictMode>
-    <MainLayout />
+    <CreateRouter routes={routes} />
   </React.StrictMode>,
   document.getElementById('root')
 );

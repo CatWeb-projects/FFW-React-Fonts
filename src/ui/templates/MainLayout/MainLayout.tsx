@@ -1,13 +1,12 @@
 import React from 'react';
 import { useRequest } from 'estafette';
-// import { Link } from 'estafette-router';
 import { tabs } from 'services/fonts-api';
 import { BuyFonts, Fonts, FontSelection } from 'services/fonts-api.types';
 
 import './MainLayout.scss';
 
 export const MainLayout = () => {
-  const { request, data, loading } = useRequest<Fonts[]>();
+  const { request, data } = useRequest<Fonts[]>();
   const {
     request: requestMyFonts,
     data: myFontsData
@@ -50,17 +49,6 @@ export const MainLayout = () => {
   //   myFontsData.content;
   // }, [myFontsData]);
 
-  const onSelectFonts = React.useCallback(
-    (id: number) =>
-      myFontsData.content.filter((item) => {
-        if (item.id === id) {
-          setSaveid(id);
-        }
-        return null;
-      }),
-    [myFontsData]
-  );
-
   console.log(data);
   console.log(myFontsData);
   console.log(buyFontsData);
@@ -83,82 +71,6 @@ export const MainLayout = () => {
                 {item.label}
               </div>
             ))}
-        </div>
-      </div>
-
-      <div
-        className="fonts-content"
-        style={{ justifyContent: loading ? 'center' : 'space-around' }}
-      >
-        {loading && <div className="loading">loading...</div>}
-        {myFontsData.content &&
-          myFontsData.content
-            .filter((_, key) => key < 1)
-            .map((font) => (
-              <div
-                className="fonts-content__left selected-common"
-                key={font.id}
-                onClick={() => onSelectFonts(font.id)}
-              >
-                <div
-                  className={`fonts-content__font-layout-left ${
-                    saveId === font.id ? 'active' : ''
-                  }`}
-                  style={{ backgroundColor: font.color }}
-                >
-                  <div
-                    className="fonts-content__selected-font-left"
-                    style={{ color: font['color-blind-label'] }}
-                  >
-                    {font.abbr}
-                  </div>
-                </div>
-                <div
-                  className={`fonts-content__cube-text ${
-                    saveId === font.id ? 'active' : ''
-                  }`}
-                >
-                  <span>{font.label}</span>
-                </div>
-              </div>
-            ))}
-
-        <div className="fonts-content__right-wrapper">
-          {myFontsData.content &&
-            myFontsData.content
-              .filter((_, key) => key >= 1)
-              .map((font) => (
-                <div
-                  className="fonts-content__right cube-common selected-common"
-                  key={font.id}
-                  onClick={() => onSelectFonts(font.id)}
-                >
-                  <div
-                    className={`fonts-content__font-layout-right ${
-                      saveId === font.id ? 'active' : ''
-                    }`}
-                    style={{
-                      backgroundColor: font.color
-                    }}
-                  >
-                    <div
-                      className="fonts-content__selected-font-right little-cubes"
-                      style={{
-                        color: font['color-blind-label']
-                      }}
-                    >
-                      {font.abbr}
-                    </div>
-                  </div>
-                  <div
-                    className={`fonts-content__cube-text ${
-                      saveId === font.id ? 'active' : ''
-                    }`}
-                  >
-                    <span>{font.label}</span>
-                  </div>
-                </div>
-              ))}
         </div>
       </div>
     </div>
