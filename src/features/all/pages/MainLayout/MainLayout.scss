@@ -20,8 +20,7 @@ html, body {
 	display: flex;
   justify-content: space-around;
   align-items: center;
-  text-transform: uppercase;
-
+  
   &__title {
     font-weight: 700;
     font-size: rem(24px);
@@ -30,6 +29,7 @@ html, body {
   &__fonts {
     display: flex;
     justify-content: space-between;
+    text-transform: uppercase;
 
     .active a {
       color: orange;

@@ -1,5 +1,5 @@
 import axios, { Canceler } from 'axios';
-import { BuyFonts, Fonts, FontSelection } from './fonts_api.types';
+import { BuyFontsProps, Fonts, FontSelection } from './fonts_api.types';
 
 const { CancelToken } = axios;
 
@@ -35,7 +35,7 @@ export const tabs = {
   },
 
   buyFonts: {
-    action: (): Promise<{ data: BuyFonts }> =>
+    action: (): Promise<{ data: BuyFontsProps }> =>
       axios.get(`${baseUrl}/fonts_b`, {
         cancelToken: new CancelToken(
           (c: Canceler) => (tabs.buyFonts.cancel = c)

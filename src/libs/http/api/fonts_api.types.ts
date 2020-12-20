@@ -15,6 +15,6 @@ export interface FontSelection {
   }[];
 }
 
-export interface BuyFonts {
+export interface BuyFontsProps {
   content?: string;
 }

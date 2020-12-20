@@ -1,48 +1,33 @@
 import React from 'react';
 import { useRequest } from 'estafette';
-import { Link } from 'estafette-router';
+import { Link, useRouterHelpers } from 'estafette-router';
 import { tabs } from 'libs/http/api/fonts_api';
-import { BuyFonts, Fonts, FontSelection } from 'libs/http/api/fonts_api.types';
+import { Fonts, FontSelection } from 'libs/http/api/fonts_api.types';
+import { FontContext } from 'contexts/FontContext';
 
 export const MyFonts = () => {
+  const { saveId, setSaveId } = React.useContext(FontContext);
+
   const { request, data, loading } = useRequest<Fonts[]>();
   const {
     request: requestMyFonts,
     data: myFontsData
   } = useRequest<FontSelection>();
-  const {
-    request: requestBuyFonts,
-    data: buyFontsData
-  } = useRequest<BuyFonts>();
 
-  const [saveId, setSaveid] = React.useState<number>();
+  const { isRouteActive } = useRouterHelpers();
 
   React.useEffect(() => {
     onFetch();
     requestMyFonts(tabs.myFonts.action());
-    requestBuyFonts(tabs.buyFonts.action());
 
     return () => {
       tabs.fonts.cancel();
       tabs.myFonts.cancel();
-      tabs.buyFonts.cancel();
     };
     // eslint-disable-next-line
   }, []);
 
   const onFetch = () => request(tabs.fonts.action());
-
-  const onToggle = React.useCallback(
-    (id: number) =>
-      data.filter((item) => {
-        if (item.id === id) {
-          setSaveid(id);
-        }
-        return null;
-      }),
-    // eslint-disable-next-line
-    [data]
-  );
 
   // const selectedFonts = React.useMemo(() => {
   //   myFontsData.content;
@@ -52,16 +37,16 @@ export const MyFonts = () => {
     (id: number) =>
       myFontsData.content.filter((item) => {
         if (item.id === id) {
-          setSaveid(id);
+          setSaveId(item.id);
         }
         return null;
       }),
-    [myFontsData]
+    [myFontsData, setSaveId]
   );
 
-  console.log(data);
   console.log(myFontsData);
-  console.log(buyFontsData);
+  // console.log(buyFontsData);
+  console.log(saveId, 'id');
   return (
     <div className="main-layout">
       <div className="font-selection">
@@ -69,13 +54,12 @@ export const MyFonts = () => {
 
         <div className="font-selection__fonts">
           {data &&
-            data.map((item) => (
+            data.map((item, key) => (
               <div
                 className={`font-selection__fonts-item ${
-                  saveId === item.id ? 'active' : ''
+                  isRouteActive(['MyFonts']) && key === 0 ? 'active' : ''
                 }`}
                 key={item.id}
-                onClick={() => onToggle(item.id)}
               >
                 <Link to={item.content_endpoint}>{item.label}</Link>
               </div>

@@ -1,7 +1,28 @@
-import * as React from 'react';
+import React from 'react';
 
-interface Props {}
+interface ProviderProps {
+  children: React.ReactNode;
+}
 
-const defaultValue = {};
+interface Props {
+  saveId: number;
+  setSaveId: React.Dispatch<React.SetStateAction<number>>;
+}
 
-export const Context = React.createContext<Props>(defaultValue);
+const defaultValue = {
+  saveId: 0,
+  setSaveId: () => {}
+};
+
+export const FontContext = React.createContext<Props>(defaultValue);
+
+export const ProviderContext = (props: ProviderProps) => {
+  const [saveId, setSaveId] = React.useState<number>(0);
+
+  const { children } = props;
+  return (
+    <FontContext.Provider value={{ saveId, setSaveId }}>
+      {children}
+    </FontContext.Provider>
+  );
+};
