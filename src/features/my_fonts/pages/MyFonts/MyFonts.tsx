@@ -44,9 +44,6 @@ export const MyFonts = () => {
     [myFontsData, setSaveId]
   );
 
-  console.log(myFontsData);
-  // console.log(buyFontsData);
-  console.log(saveId, 'id');
   return (
     <div className="main-layout">
       <div className="font-selection">
