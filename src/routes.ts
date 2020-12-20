@@ -1,5 +1,6 @@
-import { BuyFonts } from 'ui/templates/BuyFonts/BuyFonts';
-import { MainLayout } from 'ui/templates/MainLayout/MainLayout';
+import { MyFonts } from 'features/my_fonts/pages/MyFonts/MyFonts';
+import { BuyFonts } from 'features/buy_fonts/pages/BuyFonts/BuyFonts';
+import { MainLayout } from 'features/all/pages/MainLayout/MainLayout';
 
 export interface Route {
   name: string;
@@ -15,7 +16,7 @@ export const routes: Route[] =
   [
     {name: 'Main', path: '/', exact: true, component: MainLayout},
 
-    { name: 'MyFonts', path: '/my_fonts', component: MainLayout },
+    { name: 'MyFonts', path: '/fonts_a', component: MyFonts },
 
-    { name: 'BuyFonts', path: '/buy_fonts', component: BuyFonts },
+    { name: 'BuyFonts', path: '/fonts_b', component: BuyFonts },
   ];

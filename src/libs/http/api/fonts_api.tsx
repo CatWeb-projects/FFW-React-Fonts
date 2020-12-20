@@ -1,5 +1,5 @@
 import axios, { Canceler } from 'axios';
-import { BuyFonts, Fonts, FontSelection } from './fonts-api.types';
+import { BuyFonts, Fonts, FontSelection } from './fonts_api.types';
 
 const { CancelToken } = axios;
 

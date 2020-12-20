@@ -1,7 +1,8 @@
 import React from 'react';
 import { useRequest } from 'estafette';
-import { tabs } from 'services/fonts-api';
-import { BuyFonts, Fonts, FontSelection } from 'services/fonts-api.types';
+import { Link } from 'estafette-router';
+import { tabs } from 'libs/http/api/fonts_api';
+import { BuyFonts, Fonts, FontSelection } from 'libs/http/api/fonts_api.types';
 
 export const MyFonts = () => {
   const { request, data, loading } = useRequest<Fonts[]>();
@@ -76,7 +77,7 @@ export const MyFonts = () => {
                 key={item.id}
                 onClick={() => onToggle(item.id)}
               >
-                {item.label}
+                <Link to={item.content_endpoint}>{item.label}</Link>
               </div>
             ))}
         </div>
