@@ -2,7 +2,7 @@ import React from 'react';
 import { useRequest } from 'estafette';
 import { tabs } from 'libs/http/api/fonts_api';
 import { Fonts } from 'libs/http/api/fonts_api.types';
-import { FontSelectionItem } from 'ui/atoms';
+import { FontSelectionItem, Loader } from 'ui/atoms';
 
 import './MainLayout.scss';
 
@@ -35,7 +35,7 @@ export const MainLayout = () => {
         className="fonts-content"
         style={{ justifyContent: loading ? 'center' : 'space-around' }}
       >
-        {loading && <div className="loading">loading...</div>}
+        {loading && <Loader />}
       </div>
     </div>
   );

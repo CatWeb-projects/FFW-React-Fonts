@@ -3,10 +3,11 @@ import { useRequest } from 'estafette';
 import { tabs } from 'libs/http/api/fonts_api';
 import { Fonts, FontSelectionProps } from 'libs/http/api/fonts_api.types';
 import { FontContext } from 'contexts/FontContext';
-import { FontSelectionItem } from 'ui/atoms';
+import { BigFontItem, SmallFontItem } from 'ui/molecules';
+import { FontSelectionItem, Loader } from 'ui/atoms';
 
 export const MyFonts = () => {
-  const { saveId, setSaveId } = React.useContext(FontContext);
+  const { setSaveId } = React.useContext(FontContext);
 
   const { request, data, loading } = useRequest<Fonts[]>();
   const {
@@ -28,9 +29,9 @@ export const MyFonts = () => {
   const onFetch = () => request(tabs.fonts.action());
   const onFetchFonts = () => requestMyFonts(tabs.myFonts.action());
 
-  // const selectedFonts = React.useMemo(() => {
-  //   myFontsData.content;
-  // }, [myFontsData]);
+  const selectedFonts = React.useMemo(() => myFontsData.content, [
+    myFontsData.content
+  ]);
 
   const onSelectFonts = React.useCallback(
     (id: number) =>
@@ -65,74 +66,25 @@ export const MyFonts = () => {
         className="fonts-content"
         style={{ justifyContent: loading ? 'center' : 'space-around' }}
       >
-        {loading && <div className="loading">loading...</div>}
-        {myFontsData.content &&
-          myFontsData.content
+        {loading && <Loader />}
+
+        {selectedFonts &&
+          selectedFonts
             .filter((_, key) => key < 1)
             .map((font) => (
-              <div
-                className="fonts-content__left selected-common"
-                key={font.id}
-                onClick={() => onSelectFonts(font.id)}
-              >
-                <div
-                  className={`fonts-content__font-layout-left ${
-                    saveId === font.id ? 'active' : ''
-                  }`}
-                  style={{ backgroundColor: font.color }}
-                >
-                  <div
-                    className="fonts-content__selected-font-left"
-                    style={{ color: font['color-blind-label'] }}
-                  >
-                    {font.abbr}
-                  </div>
-                </div>
-                <div
-                  className={`fonts-content__cube-text ${
-                    saveId === font.id ? 'active' : ''
-                  }`}
-                >
-                  <span>{font.label}</span>
-                </div>
-              </div>
+              <BigFontItem key={font.id} font={font} onClick={onSelectFonts} />
             ))}
 
         <div className="fonts-content__right-wrapper">
-          {myFontsData.content &&
-            myFontsData.content
+          {selectedFonts &&
+            selectedFonts
               .filter((_, key) => key >= 1)
               .map((font) => (
-                <div
-                  className="fonts-content__right cube-common selected-common"
+                <SmallFontItem
                   key={font.id}
-                  onClick={() => onSelectFonts(font.id)}
-                >
-                  <div
-                    className={`fonts-content__font-layout-right ${
-                      saveId === font.id ? 'active' : ''
-                    }`}
-                    style={{
-                      backgroundColor: font.color
-                    }}
-                  >
-                    <div
-                      className="fonts-content__selected-font-right little-cubes"
-                      style={{
-                        color: font['color-blind-label']
-                      }}
-                    >
-                      {font.abbr}
-                    </div>
-                  </div>
-                  <div
-                    className={`fonts-content__cube-text ${
-                      saveId === font.id ? 'active' : ''
-                    }`}
-                  >
-                    <span>{font.label}</span>
-                  </div>
-                </div>
+                  font={font}
+                  onClick={onSelectFonts}
+                />
               ))}
         </div>
       </div>

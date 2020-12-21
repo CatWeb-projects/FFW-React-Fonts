@@ -2,7 +2,7 @@ import React from 'react';
 import { useRequest } from 'estafette';
 import { tabs } from 'libs/http/api/fonts_api';
 import { BuyFontsProps, Fonts } from 'libs/http/api/fonts_api.types';
-import { FontSelectionItem } from 'ui/atoms';
+import { FontSelectionItem, Loader } from 'ui/atoms';
 
 import './BuyFonts.scss';
 
@@ -45,7 +45,7 @@ export const BuyFonts = () => {
       </div>
 
       <div className="fonts-content" style={{ justifyContent: 'center' }}>
-        {loading && <div className="loading">loading...</div>}
+        {loading && <Loader />}
 
         <div className="buy-fonts">{buyFontsData.content}</div>
       </div>
