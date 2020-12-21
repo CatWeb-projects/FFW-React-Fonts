@@ -3,6 +3,7 @@
 
 .buy-fonts {
   font-size:rem(18px);
+  padding: rem(30px);
   color:green;
 
   @include mq($until: small-desktop) {

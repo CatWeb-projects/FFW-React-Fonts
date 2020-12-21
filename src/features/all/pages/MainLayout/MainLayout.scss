@@ -112,7 +112,8 @@ html, body {
   }
 
   .little-cubes {
-    margin-left: rem(15px);
+    margin-left: rem(20px);
+    margin-bottom: rem(10px);
     font-size: rem(24px);
     opacity: 0.8;
     font-weight: 800;
@@ -157,6 +158,7 @@ html, body {
 
   &__selected-font-left {
     margin-left: rem(20px);
+    margin-bottom: rem(10px);
     font-size: rem(40px);
     opacity: 0.8;
     font-weight: 800;
