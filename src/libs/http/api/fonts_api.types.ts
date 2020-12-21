@@ -5,7 +5,7 @@ export interface Fonts {
 }
 [];
 
-export interface FontSelection {
+export interface FontSelectionProps {
   content: {
     abbr?: string;
     color?: string;

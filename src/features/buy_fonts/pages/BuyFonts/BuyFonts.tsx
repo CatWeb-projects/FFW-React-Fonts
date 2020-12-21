@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRequest } from 'estafette';
-import { Link, useRouterHelpers } from 'estafette-router';
 import { tabs } from 'libs/http/api/fonts_api';
 import { BuyFontsProps, Fonts } from 'libs/http/api/fonts_api.types';
+import { FontSelectionItem } from 'ui/atoms';
 
 import './BuyFonts.scss';
 
@@ -13,8 +13,6 @@ export const BuyFonts = () => {
     data: buyFontsData,
     loading
   } = useRequest<BuyFontsProps>();
-
-  const { isRouteActive } = useRouterHelpers();
 
   React.useEffect(() => {
     onFetch();
@@ -36,14 +34,12 @@ export const BuyFonts = () => {
         <div className="font-selection__fonts">
           {data &&
             data.map((item, key) => (
-              <div
-                className={`font-selection__fonts-item ${
-                  isRouteActive(['BuyFonts']) && key === 1 ? 'active' : ''
-                }`}
+              <FontSelectionItem
                 key={item.id}
-              >
-                <Link to={item.content_endpoint}>{item.label}</Link>
-              </div>
+                item={item}
+                routeName="BuyFonts"
+                active={key === 1 ? true : false}
+              />
             ))}
         </div>
       </div>

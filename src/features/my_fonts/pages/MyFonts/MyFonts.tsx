@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRequest } from 'estafette';
-import { Link, useRouterHelpers } from 'estafette-router';
 import { tabs } from 'libs/http/api/fonts_api';
-import { Fonts, FontSelection } from 'libs/http/api/fonts_api.types';
+import { Fonts, FontSelectionProps } from 'libs/http/api/fonts_api.types';
 import { FontContext } from 'contexts/FontContext';
+import { FontSelectionItem } from 'ui/atoms';
 
 export const MyFonts = () => {
   const { saveId, setSaveId } = React.useContext(FontContext);
@@ -12,13 +12,11 @@ export const MyFonts = () => {
   const {
     request: requestMyFonts,
     data: myFontsData
-  } = useRequest<FontSelection>();
-
-  const { isRouteActive } = useRouterHelpers();
+  } = useRequest<FontSelectionProps>();
 
   React.useEffect(() => {
     onFetch();
-    requestMyFonts(tabs.myFonts.action());
+    onFetchFonts();
 
     return () => {
       tabs.fonts.cancel();
@@ -28,6 +26,7 @@ export const MyFonts = () => {
   }, []);
 
   const onFetch = () => request(tabs.fonts.action());
+  const onFetchFonts = () => requestMyFonts(tabs.myFonts.action());
 
   // const selectedFonts = React.useMemo(() => {
   //   myFontsData.content;
@@ -52,14 +51,12 @@ export const MyFonts = () => {
         <div className="font-selection__fonts">
           {data &&
             data.map((item, key) => (
-              <div
-                className={`font-selection__fonts-item ${
-                  isRouteActive(['MyFonts']) && key === 0 ? 'active' : ''
-                }`}
+              <FontSelectionItem
                 key={item.id}
-              >
-                <Link to={item.content_endpoint}>{item.label}</Link>
-              </div>
+                item={item}
+                routeName="MyFonts"
+                active={key === 0 ? true : false}
+              />
             ))}
         </div>
       </div>

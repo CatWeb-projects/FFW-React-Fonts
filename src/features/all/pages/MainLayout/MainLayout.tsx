@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRequest } from 'estafette';
-import { Link } from 'estafette-router';
 import { tabs } from 'libs/http/api/fonts_api';
 import { Fonts } from 'libs/http/api/fonts_api.types';
+import { FontSelectionItem } from 'ui/atoms';
 
 import './MainLayout.scss';
 
@@ -27,11 +27,7 @@ export const MainLayout = () => {
 
         <div className="font-selection__fonts">
           {data &&
-            data.map((item) => (
-              <div className={`font-selection__fonts-item`} key={item.id}>
-                <Link to={item.content_endpoint}>{item.label}</Link>
-              </div>
-            ))}
+            data.map((item) => <FontSelectionItem key={item.id} item={item} />)}
         </div>
       </div>
 

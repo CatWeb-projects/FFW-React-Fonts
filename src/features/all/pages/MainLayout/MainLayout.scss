@@ -20,10 +20,20 @@ html, body {
 	display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: rem(20px);
+
+  @include mq($until: small-desktop) {
+    flex-direction: column;
+  }
   
   &__title {
     font-weight: 700;
-    font-size: rem(24px);
+    font-size: rem(36px);
+
+    @include mq($until: small-desktop) {
+      margin-bottom: rem(10px);
+      font-size: rem(28px);
+    }
   }
   
   &__fonts {
@@ -36,34 +46,59 @@ html, body {
     }
   }
 
-  &__fonts-item {
+  &__fonts-item a {
     font-weight: 700;
     font-size: rem(18px);
     color: grey;
     padding: rem(6px 12px);
     cursor: pointer;
+    transition: all 0.3s;
+
+    @include mq($until: small-desktop) {
+      font-size: rem(16px);
+    }
+
+    &:hover {
+      color: lighten(grey, 30%);
+    }
   }
 }
 
 .fonts-content {
   display: flex;
 	align-items: center;
-	width: 80%;
-	height: 50%;
+  width: 80%;
+  height: 50%;
 	border: rem(2px solid grey);
 	border-radius: rem(20px);
   text-align: center;
 
+  @include mq($until: desktop) {
+    padding: rem(20px);
+  }
+
+  @include mq($until: small-desktop) {
+    flex-direction: column;
+  }
+
+  @include mq($until: small-tablet) {
+    height: auto;
+  }
+
   &__right {
-    height: 100%;
     margin-top: rem(30px);
   }
 
   .cube-common {
     width: 100%;
+    height: auto;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+
+    @include mq($until: small-tablet) {
+      flex-direction: column;
+    }
   }
 
   .selected-common {
@@ -91,6 +126,10 @@ html, body {
     text-align: left;
     font-size: rem(18px);
     display: flex;
+
+    @include mq($until: small-desktop) {
+      font-size: rem(16px);
+    }
    
     &::before {
       content: "\2022";
@@ -104,12 +143,16 @@ html, body {
     width: rem(200px);
     height: rem(200px);
     border-radius: rem(20px);
-    border: 2px solid black;
-    box-shadow: inset 0px 0px 0px 2px #fff;
+    border: rem(2px) solid black;
+    box-shadow: inset rem(0px 0px 0px 2px) #fff;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
 
+    @include mq($until: desktop) {
+      max-width: rem(150px);
+      max-height: rem(150px);
+    }
   }
 
   &__selected-font-left {
@@ -129,6 +172,11 @@ html, body {
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
+
+    @include mq($until: desktop) {
+      max-width: rem(80px);
+      max-height: rem(80px);
+    }
   }
 }
 

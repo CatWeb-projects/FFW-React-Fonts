@@ -4,4 +4,8 @@
 .buy-fonts {
   font-size:rem(18px);
   color:green;
+
+  @include mq($until: small-desktop) {
+    font-size:rem(16px);
+  }
 }
