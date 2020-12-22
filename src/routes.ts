@@ -1,5 +1,5 @@
-import { MyFonts } from 'features/my_fonts/pages/MyFonts/MyFonts';
-import { BuyFonts } from 'features/buy_fonts/pages/BuyFonts/BuyFonts';
+import { MyFonts } from 'features/fonts_b/pages/MyFonts/MyFonts';
+import { BuyFonts } from 'features/fonts_a/pages/BuyFonts/BuyFonts';
 import { MainLayout } from 'features/all/pages/MainLayout/MainLayout';
 
 export interface Route {
