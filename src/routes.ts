@@ -1,6 +1,6 @@
+import { MainLayout } from 'features/all/pages/MainLayout/MainLayout';
 import { MyFonts } from 'features/fonts_b/pages/MyFonts/MyFonts';
 import { BuyFonts } from 'features/fonts_a/pages/BuyFonts/BuyFonts';
-import { MainLayout } from 'features/all/pages/MainLayout/MainLayout';
 
 export interface Route {
   name: string;
