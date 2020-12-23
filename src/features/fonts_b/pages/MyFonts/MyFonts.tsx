@@ -41,7 +41,8 @@ export const MyFonts = () => {
         }
         return null;
       }),
-    [myFontsData, setSaveId]
+    //eslint-disable-next-line
+    [myFontsData]
   );
 
   return (
