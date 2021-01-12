@@ -30,10 +30,11 @@ export const ProviderContext = (props: ProviderProps) => {
     localStorage.setItem('saveId', JSON.stringify(saveId));
   }, [saveId]);
 
+  const values = {
+    saveId,
+    setSaveId
+  };
+
   const { children } = props;
-  return (
-    <FontContext.Provider value={{ saveId, setSaveId }}>
-      {children}
-    </FontContext.Provider>
-  );
+  return <FontContext.Provider value={values}>{children}</FontContext.Provider>;
 };
